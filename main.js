@@ -6,18 +6,21 @@ import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 
 
 const params = {
+   
     vertices: '{"1":{"id":1,"x":-450,"y":-150,"upper_edge_rounded":true,"lower_edge_rounded":false,"next":2,"prev":4},"2":{"id":2,"x":-450,"y":150,"upper_edge_rounded":true,"lower_edge_rounded":false,"next":3,"prev":1},"3":{"id":3,"x":450,"y":150,"upper_edge_rounded":true,"lower_edge_rounded":true,"next":4,"prev":2},"4":{"id":4,"x":450,"y":-150,"upper_edge_rounded":true,"lower_edge_rounded":true,"next":1,"prev":3}}',
     radius: 20,
-    segments: 10,
+    segments: 3,
     size: 90,
     wireframe: false,
     update: CreatePanel,
-    exportASCII: exportASCII
+    exportASCII: exportASCII,
+    version:"2.0"
 };
 
 
 
 const gui = new GUI();
+
 gui.add(params, 'vertices').name('Vertices (JSON)');
 gui.add(params, 'radius').name('Radius');
 gui.add(params, 'segments').name('segments');
@@ -25,6 +28,7 @@ gui.add(params, 'size').name('Size');
 gui.add(params, 'wireframe').name('Wireframe');
 gui.add(params, 'update').name('Update');
 gui.add(params, 'exportASCII').name('Export');
+gui.add(params, 'version').name('Version');
 
 
 gui.open();
