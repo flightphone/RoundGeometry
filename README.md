@@ -1,3 +1,20 @@
+# Setup
+
+npm install --save
+
+## Dev
+
+npm run dev
+
+## Build
+
+npm run build
+
+## Technical considerations
+Geometry from  array of 2D points vertices with width and rounded edges
+
+
+
 ```
 // vertices - The object is the vertices of the contour, all dimensions are in millimeters, but the grid should be in meters
 // upper_edge_rounded - Rounding the top edge of the current face
@@ -50,6 +67,5 @@ const makeGeometry = (
     ...
 }
 ```
-
 
 Demo: https://flightphone.github.io/roundGeometry.html
