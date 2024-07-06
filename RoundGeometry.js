@@ -5,10 +5,12 @@ Efim Manevich
 import { BufferGeometry, Float32BufferAttribute, Vector3, Vector2, ShapeUtils } from "three";
 
 const makeGeometry = (
-    vertices/*объект с вершинами*/,
-    radius/*радиус скругления*/ = 6,
-    segments/*количество сигментов*/ = 3,
-    size/*толщина панели*/ = 38
+    {
+        vertices/*an object with vertices*/ = {},
+        radius/*radius of rounding*/ = 6,
+        segments/*number of segments of rounding*/ = 3,
+        size/*panel thickness*/ = 38
+    }
 ) => {
     let scale = 1000;
     let points = [];
@@ -18,8 +20,8 @@ const makeGeometry = (
         p.y = p.y / scale;
         points.push(p);
     }
-       
-    let geometry = new RoundGeometry(points, (size - 2*radius) / scale, radius / scale, segments);
+
+    let geometry = new RoundGeometry(points, (size - 2 * radius) / scale, radius / scale, segments);
     return geometry;
 }
 
@@ -36,7 +38,7 @@ class RoundGeometry extends BufferGeometry {
             radius: radius,
             segments: segments
         };
-        
+
         let minx = 10000;
         let miny = 10000;
         points.forEach(p => {
@@ -56,9 +58,9 @@ class RoundGeometry extends BufferGeometry {
         const vects = [];
         const norms = [];
         const shapeup = [];
-        const shapeup_ix = [];
+        //const shapeup_ix = [];
         const shapelow = [];
-        const shapelow_ix = [];
+        //const shapelow_ix = [];
 
         let startvertex = 0;
         for (let i = 0; i < n; i++) {
@@ -68,7 +70,6 @@ class RoundGeometry extends BufferGeometry {
             let nor = new Vector3(0, 0, 1)
             nor.cross(vec);
             nor.normalize();
-            console.log(nor);
             vects.push(vec);
             norms.push(nor);
             for (let k = 0; k < 4; k++) {
@@ -79,8 +80,8 @@ class RoundGeometry extends BufferGeometry {
             vertices.push(points[j].x, points[j].y, 0);
             vertices.push(points[i].x, points[i].y, 0);
             uvs.push(currentLen, -height);
-            uvs.push(currentLen+vecl, -height);
-            uvs.push(currentLen+vecl, 0);
+            uvs.push(currentLen + vecl, -height);
+            uvs.push(currentLen + vecl, 0);
             uvs.push(currentLen, 0);
             currentLen += vecl;
             lengs.push(currentLen);
@@ -109,7 +110,7 @@ class RoundGeometry extends BufferGeometry {
                 }
 
                 for (let s = 0; s < segments; s++) {
-                    
+
                     let nor = getRoundNormal(i, s, lv);
                     for (let k = 0; k < 2; k++) {
                         normals.push(nor.x, nor.y, nor.z);
@@ -124,11 +125,11 @@ class RoundGeometry extends BufferGeometry {
                     if (s == segments - 1) {
                         if (lv == 1) {
                             shapeup.push(p);
-                            shapeup_ix.push(startvertex)
+                            //shapeup_ix.push(startvertex)
                         }
                         else {
                             shapelow.push(p);
-                            shapelow_ix.push(startvertex)
+                            //shapelow_ix.push(startvertex)
                         }
                     }
 
@@ -136,8 +137,8 @@ class RoundGeometry extends BufferGeometry {
                     p2 = getRound(j, s, lv);
                     p = getRoundIntersect(p1, p2, vects[i], vects[j]);
                     vertices.push(p.x, p.y, p.z);
-                    uvs.push(lengs[i+1] + shiftUV(p, j, i), -p.z);
-                    
+                    uvs.push(lengs[i + 1] + shiftUV(p, j, i), -p.z);
+
                     if (lv == 0) {
                         c = startvertex;
                         d = startvertex + 1;
@@ -159,8 +160,7 @@ class RoundGeometry extends BufferGeometry {
             }
         }
 
-        for (let i = 0; i < shapeup.length; i++)
-        {
+        for (let i = 0; i < shapeup.length; i++) {
             vertices.push(shapeup[i].x, shapeup[i].y, shapeup[i].z);
             normals.push(0, 0, 1);
             uvc(shapeup[i]);
@@ -175,8 +175,7 @@ class RoundGeometry extends BufferGeometry {
         })
         startvertex += shapeup.length;
 
-        for (let i = 0; i < shapelow.length; i++)
-        {
+        for (let i = 0; i < shapelow.length; i++) {
             vertices.push(shapelow[i].x, shapelow[i].y, shapelow[i].z);
             normals.push(0, 0, -1);
             uvc(shapelow[i]);
@@ -202,8 +201,7 @@ class RoundGeometry extends BufferGeometry {
             let uy = (p.y - miny);
             uvs.push(ux, uy);
         }
-        function shiftUV(p, i, iv)
-        {
+        function shiftUV(p, i, iv) {
             let dp = new Vector2(p.x - points[i].x, p.y - points[i].y)
             let v = new Vector2(vects[iv].x, vects[iv].y);
             v.normalize();

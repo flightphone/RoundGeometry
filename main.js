@@ -3,18 +3,19 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoundGeometry, makeGeometry } from './RoundGeometry';
 import { OBJExporter } from 'three/addons/exporters/OBJExporter.js';
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+import { VertexNormalsHelper } from 'three/addons/helpers/VertexNormalsHelper.js';
 
 
 const params = {
    
     vertices: '{"1":{"id":1,"x":-450,"y":-150,"upper_edge_rounded":true,"lower_edge_rounded":false,"next":2,"prev":4},"2":{"id":2,"x":-450,"y":150,"upper_edge_rounded":true,"lower_edge_rounded":false,"next":3,"prev":1},"3":{"id":3,"x":450,"y":150,"upper_edge_rounded":true,"lower_edge_rounded":true,"next":4,"prev":2},"4":{"id":4,"x":450,"y":-150,"upper_edge_rounded":true,"lower_edge_rounded":true,"next":1,"prev":3}}',
-    radius: 20,
+    radius: 6,
     segments: 3,
-    size: 90,
+    size: 38,
     wireframe: false,
     update: CreatePanel,
     exportASCII: exportASCII,
-    version:"2.0"
+    version:"3.0"
 };
 
 
@@ -89,6 +90,10 @@ const materialWire = new THREE.MeshStandardMaterial({
 
 let me = null;
 let me2 = null;
+let helper = null;
+
+
+
 CreatePanel();
 
 //mouse rotate
@@ -103,14 +108,25 @@ requestAnimationFrame(render);
 
 function CreatePanel() {
 
-    const geom = makeGeometry(JSON.parse(params.vertices), params.radius, params.segments, params.size, texture);
+    const par = {
+        vertices:JSON.parse(params.vertices), 
+        radius: params.radius, 
+        segments: params.segments, 
+        size: params.size
+    }
+    const geom = makeGeometry(par);
     if (me)
         scene.remove(me);
     if (me2)
         scene.remove(me2);
+    if (helper)    
+        scene.remove(helper);
     me2 = null;
     me = new THREE.Mesh(geom, materialRound);
     scene.add(me);
+
+    helper = new VertexNormalsHelper( me, 1, 0xff0000 );
+    scene.add(helper);
     if (params.wireframe) {
         me2 = new THREE.Mesh(geom, materialWire);
         scene.add(me2);
