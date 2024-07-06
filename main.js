@@ -10,13 +10,13 @@ const params = {
    
     vertices: '{"1":{"id":1,"x":-450,"y":-150,"upper_edge_rounded":true,"lower_edge_rounded":false,"next":2,"prev":4},"2":{"id":2,"x":-450,"y":150,"upper_edge_rounded":true,"lower_edge_rounded":false,"next":3,"prev":1},"3":{"id":3,"x":450,"y":150,"upper_edge_rounded":true,"lower_edge_rounded":true,"next":4,"prev":2},"4":{"id":4,"x":450,"y":-150,"upper_edge_rounded":true,"lower_edge_rounded":true,"next":1,"prev":3}}',
     //vertices: '{"1":{"id":1,"x":-500,"y":0,"upper_edge_rounded":true,"lower_edge_rounded":false,"next":2,"prev":4},"2":{"id":2,"x":-1000,"y":500,"upper_edge_rounded":true,"lower_edge_rounded":false,"next":3,"prev":1},"3":{"id":3,"x":1000,"y":0,"upper_edge_rounded":true,"lower_edge_rounded":true,"next":4,"prev":2},"4":{"id":4,"x":-1000,"y":-300,"upper_edge_rounded":true,"lower_edge_rounded":true,"next":1,"prev":3}}',
-    radius: 6,
-    segments: 3,
-    size: 38,
+    radius: 35,
+    segments: 10,
+    size: 150,
     wireframe: false,
     update: CreatePanel,
     exportASCII: exportASCII,
-    version:"4.0"
+    version:"3"
 };
 
 
