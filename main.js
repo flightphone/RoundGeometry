@@ -8,10 +8,11 @@ import { VertexNormalsHelper } from 'three/addons/helpers/VertexNormalsHelper.js
 
 const params = {
    
-    vertices: '{"1":{"id":1,"x":-450,"y":-150,"upper_edge_rounded":true,"lower_edge_rounded":false,"next":2,"prev":4},"2":{"id":2,"x":-450,"y":150,"upper_edge_rounded":true,"lower_edge_rounded":false,"next":3,"prev":1},"3":{"id":3,"x":450,"y":150,"upper_edge_rounded":true,"lower_edge_rounded":true,"next":4,"prev":2},"4":{"id":4,"x":450,"y":-150,"upper_edge_rounded":true,"lower_edge_rounded":true,"next":1,"prev":3}}',
-    radius: 6,
-    segments: 3,
-    size: 38,
+    //vertices: '{"1":{"id":1,"x":-450,"y":-150,"upper_edge_rounded":true,"lower_edge_rounded":false,"next":2,"prev":4},"2":{"id":2,"x":-450,"y":150,"upper_edge_rounded":true,"lower_edge_rounded":false,"next":3,"prev":1},"3":{"id":3,"x":450,"y":150,"upper_edge_rounded":true,"lower_edge_rounded":true,"next":4,"prev":2},"4":{"id":4,"x":450,"y":-150,"upper_edge_rounded":true,"lower_edge_rounded":true,"next":1,"prev":3}}',
+    vertices: '{"1":{"id":1,"x":-500,"y":0,"upper_edge_rounded":true,"lower_edge_rounded":false,"next":2,"prev":4},"2":{"id":2,"x":-1000,"y":500,"upper_edge_rounded":true,"lower_edge_rounded":false,"next":3,"prev":1},"3":{"id":3,"x":1000,"y":0,"upper_edge_rounded":true,"lower_edge_rounded":true,"next":4,"prev":2},"4":{"id":4,"x":-1000,"y":-300,"upper_edge_rounded":true,"lower_edge_rounded":true,"next":1,"prev":3}}',
+    radius: 35,
+    segments: 10,
+    size: 150,
     wireframe: false,
     update: CreatePanel,
     exportASCII: exportASCII,
@@ -90,7 +91,7 @@ const materialWire = new THREE.MeshStandardMaterial({
 
 let me = null;
 let me2 = null;
-let helper = null;
+//let helper = null;
 
 
 
@@ -119,14 +120,14 @@ function CreatePanel() {
         scene.remove(me);
     if (me2)
         scene.remove(me2);
-    if (helper)    
-        scene.remove(helper);
+    //if (helper)    
+    //    scene.remove(helper);
     me2 = null;
     me = new THREE.Mesh(geom, materialRound);
     scene.add(me);
 
-    helper = new VertexNormalsHelper( me, 1, 0xff0000 );
-    scene.add(helper);
+    //helper = new VertexNormalsHelper( me, 1, 0xff0000 );
+    //scene.add(helper);
     if (params.wireframe) {
         me2 = new THREE.Mesh(geom, materialWire);
         scene.add(me2);
