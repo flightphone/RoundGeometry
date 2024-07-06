@@ -92,8 +92,11 @@ class RoundGeometry extends BufferGeometry {
             let d = startvertex + 3;
             startvertex += 4;
 
-            indices.push(a, b, d);
-            indices.push(b, c, d);
+            //indices.push(a, b, d);
+            //indices.push(b, c, d);
+
+            indices.push(a, b, c);
+            indices.push(a, c, d);
         }
 
 
@@ -150,8 +153,10 @@ class RoundGeometry extends BufferGeometry {
                     else {
                         a = startvertex;
                         b = startvertex + 1;
-                        indices.push(a, b, d);
-                        indices.push(b, c, d);
+                        //indices.push(a, b, d);
+                        //indices.push(b, c, d);
+                        indices.push(a, b, c);
+                        indices.push(a, c, d);
                         d = a;
                         c = b;
                     }
